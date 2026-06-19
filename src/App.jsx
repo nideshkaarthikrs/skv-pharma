@@ -31,36 +31,43 @@ const NAV_LINKS = [
   { label: 'Contact', href: '#contact' },
 ]
 
-const SERVICES = [
+const PRODUCT_CATEGORIES = [
   {
     icon: Pill,
     title: 'Tablets & Capsules',
-    text: 'Vitamins, analgesics, antibiotics and antifungals — RECOBEX, NEAVITE-B, E-CAL, ONE PLUS range. Formulated to GMP standards.',
+    desc: 'GMP-certified oral formulations — vitamins, minerals, and analgesics for daily wellness and pain management.',
+    products: [
+      { name: 'RECOBEX-Z Capsules', composition: 'B-Complex with Zinc' },
+      { name: 'RECOBEX-C Tablets', composition: 'Multivitamins, Minerals, Cyanocobalamin & Grape Seed Extract' },
+      { name: 'NEAVITE-B Tablet', composition: 'Mecobalamin, Folic Acid, Alpha Lipoic Acid, B1, B2, B6, Inositol & Chromium Chloride' },
+      { name: 'E-CAL Capsules', composition: 'Vitamin E, Calcium Panthothenate & B-Complex' },
+      { name: 'ONE PLUS Tablet', composition: 'Aceclofenac with Paracetamol' },
+    ],
   },
   {
     icon: Sparkles,
     title: 'Skin Care Products',
-    text: 'Antifungal creams, medicated ointments, gels and shampoos — F-NIL, CLOSEAL, CINWIN AD GEL range for dermatological needs.',
-  },
-  {
-    icon: FlaskConical,
-    title: 'Oral Suspensions',
-    text: 'Pharma-grade liquid preparations packed in sterile, light-protected pharma-grade plastic bottles for safe storage and transport.',
-  },
-  {
-    icon: HeartPulse,
-    title: 'Nutraceuticals',
-    text: 'B-complex formulations, multivitamins and mineral supplements for daily wellness and nutritional support.',
-  },
-  {
-    icon: ShieldCheck,
-    title: 'Antibiotics & Antimicrobials',
-    text: 'High-efficacy antibacterial drugs including analgesics, antibiotics and antihistaminics for infection management.',
+    desc: 'Medicated dermatological formulations — antifungal, anti-inflammatory and skin restoration therapies.',
+    products: [
+      { name: 'F-NIL Soap', composition: 'Ketoconazole' },
+      { name: 'SOFTEE Soap', composition: 'Aloe Vera, Glycerin & Vitamin E' },
+      { name: 'CLOSEAL S Ointment', composition: 'Clobetasol Propionate & Salicylic Acid' },
+      { name: 'CLOSEAL S Lotion', composition: 'Clobetasol Propionate & Salicylic Acid' },
+      { name: 'CLOSEAL PLUS', composition: 'Itraconazole, Ofloxacin, Ornidazole & Clobetasol Propionate' },
+      { name: 'CINWIN AD Gel', composition: 'Clindamycin Phosphate & Adapalene Gel' },
+      { name: 'F-NIL Cream', composition: 'Ketoconazole' },
+      { name: 'F-NIL Shampoo', composition: 'Ketoconazole' },
+      { name: 'SCAVITE Lotion', composition: 'Permethrin' },
+    ],
   },
   {
     icon: Wheat,
-    title: 'Food Supplements',
-    text: 'RECOBEX Powder and RECOBEX D Powder — nutritional support formulations for recovery and sustained health.',
+    title: 'Food Products',
+    desc: 'Nutritional supplement powders for recovery, sustained health, and daily nutritional support.',
+    products: [
+      { name: 'RECOBEX Powder', composition: 'Nutritional Supplement Powder' },
+      { name: 'RECOBEX D Powder', composition: 'Nutritional Supplement Powder' },
+    ],
   },
 ]
 
@@ -871,15 +878,19 @@ function Protocol() {
 }
 
 /* ----------------------------------------------------------------
-   ServicesGrid
+   ProductCatalog
 ---------------------------------------------------------------- */
-function ServicesGrid() {
+function ProductCatalog() {
   const ref = useRef(null)
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.from('.svc-tile', {
+      gsap.from('.cat-header', {
         scrollTrigger: { trigger: ref.current, start: 'top 90%', once: true },
-        y: 30, opacity: 0, duration: 0.7, ease: 'power3.out', stagger: 0.06,
+        y: 30, opacity: 0, duration: 0.8, ease: 'power3.out', stagger: 0.15,
+      })
+      gsap.from('.prod-card', {
+        scrollTrigger: { trigger: ref.current, start: 'top 85%', once: true },
+        y: 20, opacity: 0, duration: 0.6, ease: 'power3.out', stagger: 0.04,
       })
     }, ref)
     return () => ctx.revert()
@@ -892,7 +903,7 @@ function ServicesGrid() {
       <div className="absolute bottom-0 -left-20 h-72 w-72 rounded-full bg-accent/15 blur-3xl" />
 
       <div className="relative max-w-7xl mx-auto">
-        <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-6 mb-14">
+        <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-6 mb-16">
           <div>
             <span className="font-mono text-xs uppercase tracking-[0.25em] text-accent">╱ Our Products</span>
             <h2 className="font-display font-extrabold text-4xl sm:text-5xl md:text-6xl mt-4 leading-[1.05] tracking-tight">
@@ -901,23 +912,50 @@ function ServicesGrid() {
             </h2>
           </div>
           <p className="text-white/60 max-w-md text-base leading-relaxed">
-            GMP-certified formulations across antibiotics, vitamins, skin care and nutritional supplements.
+            GMP-certified formulations across tablets & capsules, skin care and nutritional supplements — 16 products total.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-white/10 rounded-4xl overflow-hidden">
-          {SERVICES.map((svc, i) => {
-            const Icon = svc.icon
+        <div className="space-y-16">
+          {PRODUCT_CATEGORIES.map((cat, catIdx) => {
+            const Icon = cat.icon
             return (
-              <div key={i} className="svc-tile group bg-deep p-7 sm:p-9 hover:bg-white/[0.02] transition-colors duration-500 relative">
-                <div className="flex items-start justify-between mb-6">
-                  <div className="h-12 w-12 rounded-2xl bg-accent/15 border border-accent/30 flex items-center justify-center group-hover:bg-accent group-hover:scale-110 transition-all duration-500">
-                    <Icon className="h-5 w-5 text-accent group-hover:text-white" strokeWidth={2} />
+              <div key={catIdx}>
+                <div className="cat-header flex flex-col sm:flex-row sm:items-center gap-4 mb-8 pb-5 border-b border-white/10">
+                  <div className="flex items-center gap-4">
+                    <div className="h-11 w-11 rounded-2xl bg-accent/15 border border-accent/30 flex items-center justify-center flex-shrink-0">
+                      <Icon className="h-5 w-5 text-accent" strokeWidth={2} />
+                    </div>
+                    <div>
+                      <h3 className="font-display font-bold text-2xl sm:text-3xl text-white">{cat.title}</h3>
+                      <p className="text-white/45 text-sm mt-0.5 leading-relaxed max-w-lg">{cat.desc}</p>
+                    </div>
                   </div>
-                  <span className="font-mono text-[10px] text-white/30 uppercase tracking-widest">{String(i + 1).padStart(2, '0')}</span>
+                  <span className="sm:ml-auto font-mono text-[10px] text-white/30 uppercase tracking-widest border border-white/10 px-3 py-1 rounded-full self-start sm:self-auto">
+                    {cat.products.length} products
+                  </span>
                 </div>
-                <h3 className="font-display font-bold text-xl sm:text-2xl mb-3">{svc.title}</h3>
-                <p className="text-white/55 text-sm leading-relaxed">{svc.text}</p>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                  {cat.products.map((prod, prodIdx) => (
+                    <div
+                      key={prodIdx}
+                      className="prod-card group bg-white/[0.03] border border-white/10 hover:border-accent/40 hover:bg-white/[0.06] rounded-2xl p-5 transition-all duration-300"
+                    >
+                      <div className="flex items-start justify-between gap-2">
+                        <div className="min-w-0">
+                          <h4 className="font-display font-semibold text-white text-base leading-tight">{prod.name}</h4>
+                          <p className="font-mono text-[10px] uppercase tracking-wide text-white/40 mt-1.5 leading-relaxed">{prod.composition}</p>
+                        </div>
+                        <span className="font-mono text-[9px] text-white/20 tracking-widest mt-0.5 flex-shrink-0">{String(prodIdx + 1).padStart(2, '0')}</span>
+                      </div>
+                      <div className="mt-4 inline-flex items-center gap-1.5 text-accent/50 text-[10px] font-mono uppercase tracking-widest">
+                        <span className="h-0.5 w-3 bg-accent/40 rounded-full" />
+                        GMP Verified
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             )
           })}
@@ -945,32 +983,47 @@ function Gallery() {
     return () => observer.disconnect()
   }, [])
 
-  const items = [
-    // Tablets & Capsules
-    { name: 'RECOBEX-Z Capsules', sub: 'B-Complex with Zinc', category: 'Tablets & Capsules', bg: 'linear-gradient(to bottom right,rgba(26,58,92,.25),rgba(26,58,92,.08))', image: 'https://images.unsplash.com/photo-1550572017-ea5ebecb4a54?auto=format&fit=crop&w=600&q=80' },
-    { name: 'RECOBEX-C Tablets', sub: 'Multivitamins, Minerals & Grape Seed Extract', category: 'Tablets & Capsules', bg: 'linear-gradient(to bottom right,rgba(201,168,76,.2),rgba(201,168,76,.05))', image: 'https://images.unsplash.com/photo-1587854692152-cbe660dbde88?auto=format&fit=crop&w=600&q=80' },
-    { name: 'NEAVITE-B Tablet', sub: 'Mecobalamin, Folic Acid & Alpha Lipoic Acid', category: 'Tablets & Capsules', bg: 'linear-gradient(to bottom right,rgba(26,58,92,.2),rgba(26,58,92,.05))', image: 'https://images.unsplash.com/photo-1587854692152-cbe660dbde88?auto=format&fit=crop&w=600&q=80' },
-    { name: 'E-CAL Capsules', sub: 'Vitamin E with Calcium Panthothenate & B-Complex', category: 'Tablets & Capsules', bg: 'linear-gradient(to bottom right,rgba(201,168,76,.15),rgba(201,168,76,.05))', image: 'https://images.unsplash.com/photo-1550572017-ea5ebecb4a54?auto=format&fit=crop&w=600&q=80' },
-    { name: 'ONE PLUS Tablet', sub: 'Aceclofenac with Paracetamol', category: 'Tablets & Capsules', bg: 'linear-gradient(to bottom right,rgba(26,58,92,.25),rgba(26,58,92,.08))', image: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=600&q=80' },
-    // Skin Care Products
-    { name: 'F-NIL Shampoo', sub: 'Ketoconazole Shampoo', category: 'Skin Care', bg: 'linear-gradient(to bottom right,rgba(201,168,76,.2),rgba(201,168,76,.05))', image: 'https://images.unsplash.com/photo-1526045612212-70caf35c14df?auto=format&fit=crop&w=600&q=80' },
-    { name: 'F-NIL Cream', sub: 'Ketoconazole Cream', category: 'Skin Care', bg: 'linear-gradient(to bottom right,rgba(26,58,92,.2),rgba(26,58,92,.05))', image: 'https://images.unsplash.com/photo-1556228578-8c89e6adf883?auto=format&fit=crop&w=600&q=80' },
-    { name: 'F-NIL Soap', sub: 'Ketoconazole Soap', category: 'Skin Care', bg: 'linear-gradient(to bottom right,rgba(201,168,76,.15),rgba(201,168,76,.05))', image: 'https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?auto=format&fit=crop&w=600&q=80' },
-    { name: 'SOFTEE Soap', sub: 'Aloe Vera, Glycerin & Vitamin E', category: 'Skin Care', bg: 'linear-gradient(to bottom right,rgba(26,58,92,.15),rgba(26,58,92,.05))', image: 'https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?auto=format&fit=crop&w=600&q=80' },
-    { name: 'CLOSEAL S Ointment', sub: 'Clobetasol Propionate & Salicylic Acid', category: 'Skin Care', bg: 'linear-gradient(to bottom right,rgba(201,168,76,.2),rgba(201,168,76,.05))', image: 'https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=600&q=80' },
-    { name: 'CLOSEAL S Lotion', sub: 'Clobetasol Propionate & Salicylic Acid', category: 'Skin Care', bg: 'linear-gradient(to bottom right,rgba(26,58,92,.2),rgba(26,58,92,.05))', image: 'https://images.unsplash.com/photo-1556228578-8c89e6adf883?auto=format&fit=crop&w=600&q=80' },
-    { name: 'CLOSEAL PLUS', sub: 'Itraconazole, Ofloxacin, Ornidazole & Clobetasol', category: 'Skin Care', bg: 'linear-gradient(to bottom right,rgba(201,168,76,.15),rgba(201,168,76,.05))', image: 'https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=600&q=80' },
-    { name: 'CINWIN AD Gel', sub: 'Clindamycin Phosphate & Adapalene', category: 'Skin Care', bg: 'linear-gradient(to bottom right,rgba(26,58,92,.2),rgba(26,58,92,.05))', image: 'https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=600&q=80' },
-    { name: 'SCAVITE Lotion', sub: 'Permethrin Lotion', category: 'Skin Care', bg: 'linear-gradient(to bottom right,rgba(201,168,76,.2),rgba(201,168,76,.05))', image: 'https://images.unsplash.com/photo-1526045612212-70caf35c14df?auto=format&fit=crop&w=600&q=80' },
-    // Food Supplements
-    { name: 'RECOBEX Powder', sub: 'Nutritional Supplement', category: 'Food Supplements', bg: 'linear-gradient(to bottom right,rgba(26,58,92,.2),rgba(26,58,92,.05))', image: 'https://images.unsplash.com/photo-1544979590-27e6b3f42296?auto=format&fit=crop&w=600&q=80' },
-    { name: 'RECOBEX D Powder', sub: 'Nutritional Supplement', category: 'Food Supplements', bg: 'linear-gradient(to bottom right,rgba(201,168,76,.2),rgba(201,168,76,.05))', image: 'https://images.unsplash.com/photo-1544979590-27e6b3f42296?auto=format&fit=crop&w=600&q=80' },
+  const galleryCategories = [
+    {
+      title: 'Tablets & Capsules',
+      icon: Pill,
+      items: [
+        { name: 'RECOBEX-Z Capsules', sub: 'B-Complex with Zinc', bg: 'linear-gradient(to bottom right,rgba(26,58,92,.25),rgba(26,58,92,.08))', image: 'https://images.unsplash.com/photo-1550572017-ea5ebecb4a54?auto=format&fit=crop&w=600&q=80' },
+        { name: 'RECOBEX-C Tablets', sub: 'Multivitamins, Minerals, Cyanocobalamin & Grape Seed Extract', bg: 'linear-gradient(to bottom right,rgba(201,168,76,.2),rgba(201,168,76,.05))', image: 'https://images.unsplash.com/photo-1587854692152-cbe660dbde88?auto=format&fit=crop&w=600&q=80' },
+        { name: 'NEAVITE-B Tablet', sub: 'Mecobalamin, Folic Acid & Alpha Lipoic Acid', bg: 'linear-gradient(to bottom right,rgba(26,58,92,.2),rgba(26,58,92,.05))', image: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=600&q=80' },
+        { name: 'E-CAL Capsules', sub: 'Vitamin E, Calcium Panthothenate & B-Complex', bg: 'linear-gradient(to bottom right,rgba(201,168,76,.15),rgba(201,168,76,.05))', image: 'https://images.unsplash.com/photo-1576671081837-49000212a370?auto=format&fit=crop&w=600&q=80' },
+        { name: 'ONE PLUS Tablet', sub: 'Aceclofenac with Paracetamol', bg: 'linear-gradient(to bottom right,rgba(26,58,92,.25),rgba(26,58,92,.08))', image: 'https://images.unsplash.com/photo-1582750433449-648ed127bb54?auto=format&fit=crop&w=600&q=80' },
+      ],
+    },
+    {
+      title: 'Skin Care Products',
+      icon: Sparkles,
+      items: [
+        { name: 'F-NIL Soap', sub: 'Ketoconazole Soap', bg: 'linear-gradient(to bottom right,rgba(201,168,76,.15),rgba(201,168,76,.05))', image: 'https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?auto=format&fit=crop&w=600&q=80' },
+        { name: 'SOFTEE Soap', sub: 'Aloe Vera, Glycerin & Vitamin E', bg: 'linear-gradient(to bottom right,rgba(26,58,92,.15),rgba(26,58,92,.05))', image: 'https://images.unsplash.com/photo-1526045612212-70caf35c14df?auto=format&fit=crop&w=600&q=80' },
+        { name: 'CLOSEAL S Ointment', sub: 'Clobetasol Propionate & Salicylic Acid', bg: 'linear-gradient(to bottom right,rgba(201,168,76,.2),rgba(201,168,76,.05))', image: 'https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=600&q=80' },
+        { name: 'CLOSEAL S Lotion', sub: 'Clobetasol Propionate & Salicylic Acid', bg: 'linear-gradient(to bottom right,rgba(26,58,92,.2),rgba(26,58,92,.05))', image: 'https://images.unsplash.com/photo-1556228578-8c89e6adf883?auto=format&fit=crop&w=600&q=80' },
+        { name: 'CLOSEAL PLUS', sub: 'Itraconazole, Ofloxacin, Ornidazole & Clobetasol Propionate', bg: 'linear-gradient(to bottom right,rgba(201,168,76,.15),rgba(201,168,76,.05))', image: 'https://images.unsplash.com/photo-1576671081837-49000212a370?auto=format&fit=crop&w=600&q=80' },
+        { name: 'CINWIN AD Gel', sub: 'Clindamycin Phosphate & Adapalene Gel', bg: 'linear-gradient(to bottom right,rgba(26,58,92,.2),rgba(26,58,92,.05))', image: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=600&q=80' },
+        { name: 'F-NIL Cream', sub: 'Ketoconazole Cream', bg: 'linear-gradient(to bottom right,rgba(26,58,92,.2),rgba(26,58,92,.05))', image: 'https://images.unsplash.com/photo-1587854692152-cbe660dbde88?auto=format&fit=crop&w=600&q=80' },
+        { name: 'F-NIL Shampoo', sub: 'Ketoconazole Shampoo', bg: 'linear-gradient(to bottom right,rgba(201,168,76,.2),rgba(201,168,76,.05))', image: 'https://images.unsplash.com/photo-1526045612212-70caf35c14df?auto=format&fit=crop&w=600&q=80' },
+        { name: 'SCAVITE Lotion', sub: 'Permethrin Lotion', bg: 'linear-gradient(to bottom right,rgba(26,58,92,.15),rgba(26,58,92,.05))', image: 'https://images.unsplash.com/photo-1550572017-ea5ebecb4a54?auto=format&fit=crop&w=600&q=80' },
+      ],
+    },
+    {
+      title: 'Food Products',
+      icon: Wheat,
+      items: [
+        { name: 'RECOBEX Powder', sub: 'Nutritional Supplement Powder', bg: 'linear-gradient(to bottom right,rgba(26,58,92,.2),rgba(26,58,92,.05))', image: 'https://images.unsplash.com/photo-1544979590-27e6b3f42296?auto=format&fit=crop&w=600&q=80' },
+        { name: 'RECOBEX D Powder', sub: 'Nutritional Supplement Powder', bg: 'linear-gradient(to bottom right,rgba(201,168,76,.2),rgba(201,168,76,.05))', image: 'https://images.unsplash.com/photo-1582750433449-648ed127bb54?auto=format&fit=crop&w=600&q=80' },
+      ],
+    },
   ]
 
   return (
     <section id="gallery" ref={ref} className="relative py-24 px-6 sm:px-10 lg:px-16 bg-deep text-white">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-14">
+        <div className="text-center mb-16">
           <span className="font-mono text-xs uppercase tracking-[0.25em] text-accent">╱ SKV Gallery</span>
           <h2 className="font-display font-extrabold text-4xl sm:text-5xl md:text-6xl mt-4 leading-[1.05] tracking-tight">
             Our product
@@ -978,36 +1031,53 @@ function Gallery() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {items.map((item, i) => (
-            <div
-              key={i}
-              style={{ transitionDelay: visible ? `${i * 60}ms` : '0ms', backgroundImage: item.bg }}
-              className={`group relative rounded-4xl border border-white/10 hover:border-accent/40 p-6 transition-all duration-700 ease-out ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
-            >
-              <div className="relative h-36 rounded-2xl overflow-hidden mb-5">
-                <img
-                  src={item.image}
-                  alt={item.name}
-                  loading="lazy"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-                <span className="absolute top-2 right-2 font-mono text-[8px] uppercase tracking-widest text-white/80 bg-black/40 backdrop-blur-sm px-2 py-0.5 rounded-full">
-                  {item.category}
+        <div className="space-y-16">
+          {galleryCategories.map(({ title, icon: Icon, items }) => (
+            <div key={title}>
+              <div className="flex items-center gap-4 mb-8">
+                <div className="h-8 w-8 rounded-xl bg-accent/15 border border-accent/30 flex items-center justify-center flex-shrink-0">
+                  <Icon className="h-4 w-4 text-accent" strokeWidth={2} />
+                </div>
+                <h3 className="font-display font-bold text-xl sm:text-2xl text-white">{title}</h3>
+                <div className="flex-1 h-px bg-white/10" />
+                <span className="font-mono text-[10px] text-white/30 uppercase tracking-widest hidden sm:block">
+                  {items.length} products
                 </span>
               </div>
-              <h3 className="font-display font-bold text-lg text-white mb-1">{item.name}</h3>
-              <p className="font-mono text-[10px] uppercase tracking-widest text-white/50">{item.sub}</p>
-              <div className="mt-4 inline-flex items-center gap-1.5 text-accent/70 text-xs font-mono uppercase tracking-widest">
-                <span className="h-1 w-4 bg-accent/50 rounded-full" />
-                GMP Verified
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {items.map((item, i) => (
+                  <div
+                    key={i}
+                    style={{ transitionDelay: visible ? `${i * 60}ms` : '0ms', backgroundImage: item.bg }}
+                    className={`group relative rounded-4xl border border-white/10 hover:border-accent/40 p-6 transition-all duration-700 ease-out ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
+                  >
+                    <div className="relative h-36 rounded-2xl overflow-hidden mb-5">
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        loading="lazy"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                      <span className="absolute top-2 right-2 font-mono text-[8px] uppercase tracking-widest text-white/80 bg-black/40 backdrop-blur-sm px-2 py-0.5 rounded-full">
+                        {title}
+                      </span>
+                    </div>
+                    <h4 className="font-display font-bold text-lg text-white mb-1">{item.name}</h4>
+                    <p className="font-mono text-[10px] uppercase tracking-widest text-white/50">{item.sub}</p>
+                    <div className="mt-4 inline-flex items-center gap-1.5 text-accent/70 text-xs font-mono uppercase tracking-widest">
+                      <span className="h-1 w-4 bg-accent/50 rounded-full" />
+                      GMP Verified
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           ))}
         </div>
 
-        <p className="text-center text-white/30 font-mono text-xs uppercase tracking-widest mt-10">
+        <p className="text-center text-white/30 font-mono text-xs uppercase tracking-widest mt-12">
           Product images available on request · info@skvpharma.com
         </p>
       </div>
@@ -1216,9 +1286,9 @@ function Footer() {
           <div>
             <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-accent mb-4">Products</p>
             <ul className="space-y-2.5">
-              {SERVICES.slice(0, 4).map((s, i) => (
+              {PRODUCT_CATEGORIES.map((cat, i) => (
                 <li key={i}>
-                  <a href="#products" className="text-white/65 hover:text-accent transition text-sm">{s.title}</a>
+                  <a href="#products" className="text-white/65 hover:text-accent transition text-sm">{cat.title}</a>
                 </li>
               ))}
             </ul>
@@ -1285,7 +1355,7 @@ export default function App() {
         <Features />
         <Pillars />
         <Protocol />
-        <ServicesGrid />
+        <ProductCatalog />
         <Gallery />
         <TrustSignals />
         <ContactForm />
