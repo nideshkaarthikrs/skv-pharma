@@ -19,7 +19,6 @@ import {
   Wheat,
   MessageCircle,
   Stethoscope,
-  Image,
 } from 'lucide-react'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -947,12 +946,25 @@ function Gallery() {
   }, [])
 
   const items = [
-    { name: 'RECOBEX-Z Capsules', sub: 'B-complex with Zinc', bg: 'linear-gradient(to bottom right,rgba(26,58,92,.2),rgba(26,58,92,.05))' },
-    { name: 'F-NIL Shampoo', sub: 'Ketoconazole Formula', bg: 'linear-gradient(to bottom right,rgba(201,168,76,.2),rgba(201,168,76,.05))' },
-    { name: 'CLOSEAL S Ointment', sub: 'Clobetasol Propionate', bg: 'linear-gradient(to bottom right,rgba(26,58,92,.15),rgba(26,58,92,.05))' },
-    { name: 'NEAVITE-B Tablet', sub: 'Mecobalamin & Folic Acid', bg: 'linear-gradient(to bottom right,rgba(201,168,76,.15),rgba(201,168,76,.05))' },
-    { name: 'CINWIN AD Gel', sub: 'Clindamycin & Adapalene', bg: 'linear-gradient(to bottom right,rgba(26,58,92,.2),rgba(26,58,92,.05))' },
-    { name: 'RECOBEX Powder', sub: 'Nutritional Supplement', bg: 'linear-gradient(to bottom right,rgba(201,168,76,.2),rgba(201,168,76,.05))' },
+    // Tablets & Capsules
+    { name: 'RECOBEX-Z Capsules', sub: 'B-Complex with Zinc', category: 'Tablets & Capsules', bg: 'linear-gradient(to bottom right,rgba(26,58,92,.25),rgba(26,58,92,.08))', image: 'https://images.unsplash.com/photo-1550572017-ea5ebecb4a54?auto=format&fit=crop&w=600&q=80' },
+    { name: 'RECOBEX-C Tablets', sub: 'Multivitamins, Minerals & Grape Seed Extract', category: 'Tablets & Capsules', bg: 'linear-gradient(to bottom right,rgba(201,168,76,.2),rgba(201,168,76,.05))', image: 'https://images.unsplash.com/photo-1587854692152-cbe660dbde88?auto=format&fit=crop&w=600&q=80' },
+    { name: 'NEAVITE-B Tablet', sub: 'Mecobalamin, Folic Acid & Alpha Lipoic Acid', category: 'Tablets & Capsules', bg: 'linear-gradient(to bottom right,rgba(26,58,92,.2),rgba(26,58,92,.05))', image: 'https://images.unsplash.com/photo-1587854692152-cbe660dbde88?auto=format&fit=crop&w=600&q=80' },
+    { name: 'E-CAL Capsules', sub: 'Vitamin E with Calcium Panthothenate & B-Complex', category: 'Tablets & Capsules', bg: 'linear-gradient(to bottom right,rgba(201,168,76,.15),rgba(201,168,76,.05))', image: 'https://images.unsplash.com/photo-1550572017-ea5ebecb4a54?auto=format&fit=crop&w=600&q=80' },
+    { name: 'ONE PLUS Tablet', sub: 'Aceclofenac with Paracetamol', category: 'Tablets & Capsules', bg: 'linear-gradient(to bottom right,rgba(26,58,92,.25),rgba(26,58,92,.08))', image: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=600&q=80' },
+    // Skin Care Products
+    { name: 'F-NIL Shampoo', sub: 'Ketoconazole Shampoo', category: 'Skin Care', bg: 'linear-gradient(to bottom right,rgba(201,168,76,.2),rgba(201,168,76,.05))', image: 'https://images.unsplash.com/photo-1526045612212-70caf35c14df?auto=format&fit=crop&w=600&q=80' },
+    { name: 'F-NIL Cream', sub: 'Ketoconazole Cream', category: 'Skin Care', bg: 'linear-gradient(to bottom right,rgba(26,58,92,.2),rgba(26,58,92,.05))', image: 'https://images.unsplash.com/photo-1556228578-8c89e6adf883?auto=format&fit=crop&w=600&q=80' },
+    { name: 'F-NIL Soap', sub: 'Ketoconazole Soap', category: 'Skin Care', bg: 'linear-gradient(to bottom right,rgba(201,168,76,.15),rgba(201,168,76,.05))', image: 'https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?auto=format&fit=crop&w=600&q=80' },
+    { name: 'SOFTEE Soap', sub: 'Aloe Vera, Glycerin & Vitamin E', category: 'Skin Care', bg: 'linear-gradient(to bottom right,rgba(26,58,92,.15),rgba(26,58,92,.05))', image: 'https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?auto=format&fit=crop&w=600&q=80' },
+    { name: 'CLOSEAL S Ointment', sub: 'Clobetasol Propionate & Salicylic Acid', category: 'Skin Care', bg: 'linear-gradient(to bottom right,rgba(201,168,76,.2),rgba(201,168,76,.05))', image: 'https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=600&q=80' },
+    { name: 'CLOSEAL S Lotion', sub: 'Clobetasol Propionate & Salicylic Acid', category: 'Skin Care', bg: 'linear-gradient(to bottom right,rgba(26,58,92,.2),rgba(26,58,92,.05))', image: 'https://images.unsplash.com/photo-1556228578-8c89e6adf883?auto=format&fit=crop&w=600&q=80' },
+    { name: 'CLOSEAL PLUS', sub: 'Itraconazole, Ofloxacin, Ornidazole & Clobetasol', category: 'Skin Care', bg: 'linear-gradient(to bottom right,rgba(201,168,76,.15),rgba(201,168,76,.05))', image: 'https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=600&q=80' },
+    { name: 'CINWIN AD Gel', sub: 'Clindamycin Phosphate & Adapalene', category: 'Skin Care', bg: 'linear-gradient(to bottom right,rgba(26,58,92,.2),rgba(26,58,92,.05))', image: 'https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=600&q=80' },
+    { name: 'SCAVITE Lotion', sub: 'Permethrin Lotion', category: 'Skin Care', bg: 'linear-gradient(to bottom right,rgba(201,168,76,.2),rgba(201,168,76,.05))', image: 'https://images.unsplash.com/photo-1526045612212-70caf35c14df?auto=format&fit=crop&w=600&q=80' },
+    // Food Supplements
+    { name: 'RECOBEX Powder', sub: 'Nutritional Supplement', category: 'Food Supplements', bg: 'linear-gradient(to bottom right,rgba(26,58,92,.2),rgba(26,58,92,.05))', image: 'https://images.unsplash.com/photo-1544979590-27e6b3f42296?auto=format&fit=crop&w=600&q=80' },
+    { name: 'RECOBEX D Powder', sub: 'Nutritional Supplement', category: 'Food Supplements', bg: 'linear-gradient(to bottom right,rgba(201,168,76,.2),rgba(201,168,76,.05))', image: 'https://images.unsplash.com/photo-1544979590-27e6b3f42296?auto=format&fit=crop&w=600&q=80' },
   ]
 
   return (
@@ -970,14 +982,20 @@ function Gallery() {
           {items.map((item, i) => (
             <div
               key={i}
-              style={{ transitionDelay: visible ? `${i * 80}ms` : '0ms' }}
-              style={{ backgroundImage: item.bg }}
-              className={`group relative rounded-4xl border border-white/10 hover:border-accent/40 p-8 transition-all duration-700 ease-out ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
+              style={{ transitionDelay: visible ? `${i * 60}ms` : '0ms', backgroundImage: item.bg }}
+              className={`group relative rounded-4xl border border-white/10 hover:border-accent/40 p-6 transition-all duration-700 ease-out ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
             >
-              <div className="h-32 flex items-center justify-center mb-6">
-                <div className="h-20 w-20 rounded-3xl bg-white/10 border border-white/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
-                  <Image className="h-8 w-8 text-white/40" strokeWidth={1.5} />
-                </div>
+              <div className="relative h-36 rounded-2xl overflow-hidden mb-5">
+                <img
+                  src={item.image}
+                  alt={item.name}
+                  loading="lazy"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                <span className="absolute top-2 right-2 font-mono text-[8px] uppercase tracking-widest text-white/80 bg-black/40 backdrop-blur-sm px-2 py-0.5 rounded-full">
+                  {item.category}
+                </span>
               </div>
               <h3 className="font-display font-bold text-lg text-white mb-1">{item.name}</h3>
               <p className="font-mono text-[10px] uppercase tracking-widest text-white/50">{item.sub}</p>
