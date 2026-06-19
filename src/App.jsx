@@ -8,12 +8,10 @@ import {
   MapPin,
   ArrowUpRight,
   ArrowRight,
-  CheckCircle2,
   ShieldCheck,
   Award,
   Menu,
   X,
-  Upload,
   FlaskConical,
   Pill,
   Sparkles,
@@ -1071,180 +1069,91 @@ function TrustSignals() {
 }
 
 /* ----------------------------------------------------------------
-   Contact Form
+   Contact
 ---------------------------------------------------------------- */
 function ContactForm() {
-  const [form, setForm] = useState({ name: '', email: '', phone: '', subject: '', message: '' })
-  const [files, setFiles] = useState([])
-  const [status, setStatus] = useState('idle')
-  const dropRef = useRef(null)
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    if (!form.name || !form.email || !form.message) return
-    setStatus('sending')
-    setTimeout(() => setStatus('sent'), 1200)
-  }
-
-  const handleFiles = (newFiles) => {
-    setFiles((prev) => [...prev, ...Array.from(newFiles)].slice(0, 5))
-  }
+  const contacts = [
+    {
+      icon: Phone,
+      label: 'Call directly',
+      value: '8883967672 / 9003849691',
+      href: 'tel:+918883967672',
+      color: 'bg-primary/10 border-primary/20 group-hover:bg-primary',
+      iconColor: 'text-primary group-hover:text-white',
+    },
+    {
+      icon: Mail,
+      label: 'Email us',
+      value: 'info@skvpharma.com',
+      href: 'mailto:info@skvpharma.com',
+      color: 'bg-primary/10 border-primary/20 group-hover:bg-primary',
+      iconColor: 'text-primary group-hover:text-white',
+    },
+    {
+      icon: MapPin,
+      label: 'Location',
+      value: 'No. 1/14 D, Thillai Nagar, Managiri, Tamil Nadu',
+      href: null,
+      color: 'bg-primary/10 border-primary/20',
+      iconColor: 'text-primary',
+    },
+    {
+      icon: MessageCircle,
+      label: 'WhatsApp',
+      value: 'Chat with us',
+      href: 'https://wa.me/918883967672',
+      external: true,
+      color: 'bg-emerald-500/10 border-emerald-500/20 group-hover:bg-emerald-500',
+      iconColor: 'text-emerald-600 group-hover:text-white',
+    },
+  ]
 
   return (
     <section id="contact" className="relative py-24 sm:py-32 px-6 sm:px-10 lg:px-16 bg-background">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid lg:grid-cols-12 gap-10 lg:gap-16">
-          <div className="lg:col-span-5">
-            <span className="font-mono text-xs uppercase tracking-[0.25em] text-primary">╱ Contact</span>
-            <h2 className="font-display font-extrabold text-4xl sm:text-5xl md:text-6xl text-ink mt-4 leading-[1.05] tracking-tight">
-              How can we
-              <span className="block font-serif italic font-medium text-primary">help you?</span>
-            </h2>
-            <p className="text-muted text-lg mt-6 leading-relaxed max-w-md">
-              Send us your enquiry and we will get back to you as soon as possible to discuss your needs.
-            </p>
+      <div className="max-w-5xl mx-auto">
+        <div className="mb-14">
+          <span className="font-mono text-xs uppercase tracking-[0.25em] text-primary">╱ Contact</span>
+          <h2 className="font-display font-extrabold text-4xl sm:text-5xl md:text-6xl text-ink mt-4 leading-[1.05] tracking-tight">
+            How can we
+            <span className="block font-serif italic font-medium text-primary">help you?</span>
+          </h2>
+          <p className="text-muted text-lg mt-6 leading-relaxed max-w-2xl">
+            Reach out through any of the channels below and we will get back to you as soon as possible to discuss your needs.
+          </p>
+        </div>
 
-            <div className="mt-10 space-y-4">
-              <a href="tel:+918883967672" className="lift-on-hover flex items-center gap-4 group">
-                <span className="h-12 w-12 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center group-hover:bg-primary transition">
-                  <Phone className="h-5 w-5 text-primary group-hover:text-white" />
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+          {contacts.map(({ icon: Icon, label, value, href, external, color, iconColor }, i) => {
+            const inner = (
+              <>
+                <span className={`h-14 w-14 rounded-2xl border flex items-center justify-center flex-shrink-0 transition-all duration-300 ${color}`}>
+                  <Icon className={`h-6 w-6 transition-colors duration-300 ${iconColor}`} strokeWidth={1.8} />
                 </span>
-                <span>
-                  <span className="block font-mono text-[10px] uppercase tracking-widest text-muted">Call directly</span>
-                  <span className="font-display font-semibold text-ink text-lg">8883967672 / 9003849691</span>
+                <span className="min-w-0">
+                  <span className="block font-mono text-[10px] uppercase tracking-widest text-muted mb-1">{label}</span>
+                  <span className="font-display font-semibold text-ink text-lg leading-snug break-words">{value}</span>
                 </span>
+              </>
+            )
+            const cls = `group flex items-center gap-5 bg-white border border-divider rounded-3xl p-6 shadow-sm hover:border-primary/30 hover:shadow-md transition-all duration-300 ${href ? 'lift-on-hover' : ''}`
+            return href ? (
+              <a key={i} href={href} className={cls} {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>
+                {inner}
               </a>
+            ) : (
+              <div key={i} className={cls}>{inner}</div>
+            )
+          })}
+        </div>
 
-              <a href="mailto:info@skvpharma.com" className="lift-on-hover flex items-center gap-4 group">
-                <span className="h-12 w-12 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center group-hover:bg-primary transition">
-                  <Mail className="h-5 w-5 text-primary group-hover:text-white" />
-                </span>
-                <span>
-                  <span className="block font-mono text-[10px] uppercase tracking-widest text-muted">Email us</span>
-                  <span className="font-display font-semibold text-ink text-lg">info@skvpharma.com</span>
-                </span>
-              </a>
-
-              <div className="flex items-center gap-4">
-                <span className="h-12 w-12 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center">
-                  <MapPin className="h-5 w-5 text-primary" />
-                </span>
-                <span>
-                  <span className="block font-mono text-[10px] uppercase tracking-widest text-muted">Location</span>
-                  <span className="font-display font-semibold text-ink">No. 1/14 D, Thillai Nagar, Managiri, Tamil Nadu</span>
-                </span>
-              </div>
-
-              <a
-                href="https://wa.me/918883967672"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="lift-on-hover flex items-center gap-4 group"
-              >
-                <span className="h-12 w-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center group-hover:bg-emerald-500 transition">
-                  <MessageCircle className="h-5 w-5 text-emerald-600 group-hover:text-white" />
-                </span>
-                <span>
-                  <span className="block font-mono text-[10px] uppercase tracking-widest text-muted">WhatsApp</span>
-                  <span className="font-display font-semibold text-ink text-lg">Chat with us</span>
-                </span>
-              </a>
-            </div>
-
-            <div className="mt-10 p-5 rounded-3xl bg-primary/5 border border-primary/15">
-              <p className="font-mono text-[10px] uppercase tracking-widest text-primary mb-2">Our Commitment</p>
-              <p className="text-sm text-muted leading-relaxed">
-                We understand the needs of the medical profession. Your enquiry will be handled with full dedication and sincerity by our technically qualified team.
-              </p>
-            </div>
-          </div>
-
-          <div className="lg:col-span-7">
-            <form onSubmit={handleSubmit} className="bg-surface border border-divider rounded-5xl p-7 sm:p-10 shadow-xl shadow-primary/5">
-              {status !== 'sent' ? (
-                <>
-                  <div className="grid sm:grid-cols-2 gap-5">
-                    <Field label="Full Name" required value={form.name} onChange={(v) => setForm({ ...form, name: v })} />
-                    <Field label="Email Address" type="email" required value={form.email} onChange={(v) => setForm({ ...form, email: v })} />
-                    <Field label="Phone Number" type="tel" value={form.phone} onChange={(v) => setForm({ ...form, phone: v })} />
-                    <Field label="Subject" value={form.subject} onChange={(v) => setForm({ ...form, subject: v })} />
-                  </div>
-
-                  <div className="mt-5">
-                    <label className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted mb-2 block">Your Message *</label>
-                    <textarea
-                      value={form.message}
-                      onChange={(e) => setForm({ ...form, message: e.target.value })}
-                      required rows={5}
-                      placeholder="Describe your enquiry, product requirement, or any questions..."
-                      className="w-full bg-background border border-divider rounded-2xl px-4 py-3.5 text-ink placeholder-muted/60 focus:border-primary focus:ring-4 focus:ring-primary/15 outline-none transition resize-none font-body"
-                    />
-                  </div>
-
-                  <div
-                    ref={dropRef}
-                    onDragOver={(e) => { e.preventDefault(); dropRef.current?.classList.add('!border-primary', '!bg-primary/5') }}
-                    onDragLeave={() => dropRef.current?.classList.remove('!border-primary', '!bg-primary/5')}
-                    onDrop={(e) => { e.preventDefault(); dropRef.current?.classList.remove('!border-primary', '!bg-primary/5'); handleFiles(e.dataTransfer.files) }}
-                    className="mt-5 border-2 border-dashed border-divider rounded-3xl p-6 text-center hover:border-primary/50 transition-colors cursor-pointer"
-                  >
-                    <input type="file" multiple id="file-up" className="hidden" onChange={(e) => handleFiles(e.target.files)} />
-                    <label htmlFor="file-up" className="cursor-pointer block">
-                      <Upload className="h-6 w-6 mx-auto text-primary mb-2" />
-                      <p className="font-display font-semibold text-ink text-sm">Attach enquiry documents</p>
-                      <p className="text-xs text-muted mt-1">Click or drag files here (max 5 files)</p>
-                      {files.length > 0 && (
-                        <div className="mt-4 flex flex-wrap gap-2 justify-center">
-                          {files.map((f, i) => (
-                            <span key={i} className="inline-flex items-center gap-1.5 bg-primary/10 text-primary text-xs px-3 py-1.5 rounded-full font-mono">
-                              <CheckCircle2 className="h-3 w-3" />
-                              {f.name.length > 22 ? f.name.slice(0, 22) + '…' : f.name}
-                            </span>
-                          ))}
-                        </div>
-                      )}
-                    </label>
-                  </div>
-
-                  <div className="mt-7 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                    <p className="text-xs text-muted">We'll respond as soon as possible. Fields marked * are required.</p>
-                    <button
-                      type="submit"
-                      disabled={status === 'sending'}
-                      className="magnetic-btn inline-flex items-center gap-2 bg-primary text-white font-semibold px-7 py-3.5 rounded-full shadow-lg shadow-primary/30 disabled:opacity-50"
-                    >
-                      {status === 'sending' ? 'Sending...' : 'Send Enquiry'}
-                      <ArrowRight className="h-4 w-4" />
-                    </button>
-                  </div>
-                </>
-              ) : (
-                <div className="text-center py-12">
-                  <div className="h-16 w-16 mx-auto rounded-full bg-primary/15 flex items-center justify-center mb-6">
-                    <CheckCircle2 className="h-8 w-8 text-primary" />
-                  </div>
-                  <h3 className="font-display font-bold text-2xl text-ink mb-3">Thank you for your enquiry</h3>
-                  <p className="text-muted max-w-md mx-auto">We'll get back to you as soon as possible to discuss your needs.</p>
-                </div>
-              )}
-            </form>
-          </div>
+        <div className="p-6 sm:p-8 rounded-4xl bg-primary/5 border border-primary/15">
+          <p className="font-mono text-[10px] uppercase tracking-widest text-primary mb-3">Our Commitment</p>
+          <p className="text-muted leading-relaxed max-w-2xl">
+            We understand the needs of the medical profession. Your enquiry will be handled with full dedication and sincerity by our technically qualified team.
+          </p>
         </div>
       </div>
     </section>
-  )
-}
-
-function Field({ label, type = 'text', required, value, onChange }) {
-  return (
-    <div>
-      <label className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted mb-2 block">{label} {required && '*'}</label>
-      <input
-        type={type} required={required} value={value}
-        onChange={(e) => onChange(e.target.value)}
-        className="w-full bg-background border border-divider rounded-2xl px-4 py-3.5 text-ink placeholder-muted/60 focus:border-primary focus:ring-4 focus:ring-primary/15 outline-none transition font-body"
-      />
-    </div>
   )
 }
 
