@@ -881,29 +881,51 @@ function Protocol() {
    ProductCatalog
 ---------------------------------------------------------------- */
 function ProductCatalog() {
-  const ref = useRef(null)
+  const headerRef = useRef(null)
+  const [headerVisible, setHeaderVisible] = useState(false)
+  const [catVisible, setCatVisible] = useState({})
+  const catRefs = useRef([])
+
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.from('.cat-header', {
-        scrollTrigger: { trigger: ref.current, start: 'top 90%', once: true },
-        y: 30, opacity: 0, duration: 0.8, ease: 'power3.out', stagger: 0.15,
-      })
-      gsap.from('.prod-card', {
-        scrollTrigger: { trigger: ref.current, start: 'top 85%', once: true },
-        y: 20, opacity: 0, duration: 0.6, ease: 'power3.out', stagger: 0.04,
-      })
-    }, ref)
-    return () => ctx.revert()
+    const el = headerRef.current
+    if (!el) return
+    const obs = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setHeaderVisible(true); obs.disconnect() } },
+      { threshold: 0.15 }
+    )
+    obs.observe(el)
+    return () => obs.disconnect()
+  }, [])
+
+  useEffect(() => {
+    const observers = catRefs.current.map((el, idx) => {
+      if (!el) return null
+      const obs = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setCatVisible(prev => ({ ...prev, [idx]: true }))
+            obs.disconnect()
+          }
+        },
+        { threshold: 0.1 }
+      )
+      obs.observe(el)
+      return obs
+    })
+    return () => observers.forEach(o => o?.disconnect())
   }, [])
 
   return (
-    <section id="products" ref={ref} className="relative py-24 px-6 sm:px-10 lg:px-16 bg-deep text-white overflow-hidden rounded-t-6xl">
+    <section id="products" className="relative py-24 px-6 sm:px-10 lg:px-16 bg-deep text-white overflow-hidden rounded-t-6xl">
       <div className="absolute inset-0 grid-bg opacity-20" />
       <div className="absolute -top-20 -right-20 h-96 w-96 rounded-full bg-primary/20 blur-3xl" />
       <div className="absolute bottom-0 -left-20 h-72 w-72 rounded-full bg-accent/15 blur-3xl" />
 
       <div className="relative max-w-7xl mx-auto">
-        <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-6 mb-16">
+        <div
+          ref={headerRef}
+          className={`flex flex-col sm:flex-row items-start sm:items-end justify-between gap-6 mb-16 transition-all duration-700 ease-out ${headerVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
+        >
           <div>
             <span className="font-mono text-xs uppercase tracking-[0.25em] text-accent">╱ Our Products</span>
             <h2 className="font-display font-extrabold text-4xl sm:text-5xl md:text-6xl mt-4 leading-[1.05] tracking-tight">
@@ -919,9 +941,10 @@ function ProductCatalog() {
         <div className="space-y-16">
           {PRODUCT_CATEGORIES.map((cat, catIdx) => {
             const Icon = cat.icon
+            const isVisible = !!catVisible[catIdx]
             return (
-              <div key={catIdx}>
-                <div className="cat-header flex flex-col sm:flex-row sm:items-center gap-4 mb-8 pb-5 border-b border-white/10">
+              <div key={catIdx} ref={el => catRefs.current[catIdx] = el}>
+                <div className={`flex flex-col sm:flex-row sm:items-center gap-4 mb-8 pb-5 border-b border-white/10 transition-all duration-700 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
                   <div className="flex items-center gap-4">
                     <div className="h-11 w-11 rounded-2xl bg-accent/15 border border-accent/30 flex items-center justify-center flex-shrink-0">
                       <Icon className="h-5 w-5 text-accent" strokeWidth={2} />
@@ -940,7 +963,8 @@ function ProductCatalog() {
                   {cat.products.map((prod, prodIdx) => (
                     <div
                       key={prodIdx}
-                      className="prod-card group bg-white/[0.03] border border-white/10 hover:border-accent/40 hover:bg-white/[0.06] rounded-2xl p-5 transition-all duration-300"
+                      style={{ transitionDelay: isVisible ? `${prodIdx * 60}ms` : '0ms' }}
+                      className={`group bg-white/[0.03] border border-white/10 hover:border-accent/40 hover:bg-white/[0.06] rounded-2xl p-5 transition-all duration-500 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
                     >
                       <div className="flex items-start justify-between gap-2">
                         <div className="min-w-0">
