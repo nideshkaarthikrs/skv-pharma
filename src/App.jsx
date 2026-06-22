@@ -1012,8 +1012,8 @@ function Gallery() {
       title: 'Tablets & Capsules',
       icon: Pill,
       items: [
-        { name: 'RECOBEX-Z Capsules', sub: 'B-Complex with Zinc', bg: 'linear-gradient(to bottom right,rgba(26,58,92,.25),rgba(26,58,92,.08))', image: 'https://images.unsplash.com/photo-1550572017-ea5ebecb4a54?auto=format&fit=crop&w=600&q=80' },
-        { name: 'RECOBEX-C Tablets', sub: 'Multivitamins, Minerals, Cyanocobalamin & Grape Seed Extract', bg: 'linear-gradient(to bottom right,rgba(201,168,76,.2),rgba(201,168,76,.05))', image: 'https://images.unsplash.com/photo-1587854692152-cbe660dbde88?auto=format&fit=crop&w=600&q=80' },
+        { name: 'RECOBEX-Z Capsules', sub: 'B-Complex with Zinc', bg: 'linear-gradient(to bottom right,rgba(26,58,92,.25),rgba(26,58,92,.08))', image: '/recobex-tablets.jpeg' },
+        { name: 'RECOBEX-C Tablets', sub: 'Multivitamins, Minerals, Cyanocobalamin & Grape Seed Extract', bg: 'linear-gradient(to bottom right,rgba(201,168,76,.2),rgba(201,168,76,.05))', image: '/recobex-tablets.jpeg' },
         { name: 'NEAVITE-B Tablet', sub: 'Mecobalamin, Folic Acid & Alpha Lipoic Acid', bg: 'linear-gradient(to bottom right,rgba(26,58,92,.2),rgba(26,58,92,.05))', image: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=600&q=80' },
         { name: 'E-CAL Capsules', sub: 'Vitamin E, Calcium Panthothenate & B-Complex', bg: 'linear-gradient(to bottom right,rgba(201,168,76,.15),rgba(201,168,76,.05))', image: 'https://images.unsplash.com/photo-1576671081837-49000212a370?auto=format&fit=crop&w=600&q=80' },
         { name: 'ONE PLUS Tablet', sub: 'Aceclofenac with Paracetamol', bg: 'linear-gradient(to bottom right,rgba(26,58,92,.25),rgba(26,58,92,.08))', image: 'https://images.unsplash.com/photo-1582750433449-648ed127bb54?auto=format&fit=crop&w=600&q=80' },
@@ -1023,14 +1023,14 @@ function Gallery() {
       title: 'Skin Care Products',
       icon: Sparkles,
       items: [
-        { name: 'F-NIL Soap', sub: 'Ketoconazole Soap', bg: 'linear-gradient(to bottom right,rgba(201,168,76,.15),rgba(201,168,76,.05))', image: 'https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?auto=format&fit=crop&w=600&q=80' },
-        { name: 'SOFTEE Soap', sub: 'Aloe Vera, Glycerin & Vitamin E', bg: 'linear-gradient(to bottom right,rgba(26,58,92,.15),rgba(26,58,92,.05))', image: 'https://images.unsplash.com/photo-1526045612212-70caf35c14df?auto=format&fit=crop&w=600&q=80' },
-        { name: 'CLOSEAL S Ointment', sub: 'Clobetasol Propionate & Salicylic Acid', bg: 'linear-gradient(to bottom right,rgba(201,168,76,.2),rgba(201,168,76,.05))', image: 'https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=600&q=80' },
-        { name: 'CLOSEAL S Lotion', sub: 'Clobetasol Propionate & Salicylic Acid', bg: 'linear-gradient(to bottom right,rgba(26,58,92,.2),rgba(26,58,92,.05))', image: 'https://images.unsplash.com/photo-1556228578-8c89e6adf883?auto=format&fit=crop&w=600&q=80' },
+        { name: 'F-NIL Soap', sub: 'Ketoconazole Soap', bg: 'linear-gradient(to bottom right,rgba(201,168,76,.15),rgba(201,168,76,.05))', image: '/f-nil-products.jpeg' },
+        { name: 'SOFTEE Soap', sub: 'Aloe Vera, Glycerin & Vitamin E', bg: 'linear-gradient(to bottom right,rgba(26,58,92,.15),rgba(26,58,92,.05))', image: '/softee-soap.jpeg' },
+        { name: 'CLOSEAL S Ointment', sub: 'Clobetasol Propionate & Salicylic Acid', bg: 'linear-gradient(to bottom right,rgba(201,168,76,.2),rgba(201,168,76,.05))', image: '/closeal-products.jpeg' },
+        { name: 'CLOSEAL S Lotion', sub: 'Clobetasol Propionate & Salicylic Acid', bg: 'linear-gradient(to bottom right,rgba(26,58,92,.2),rgba(26,58,92,.05))', image: '/closeal-products.jpeg' },
         { name: 'CLOSEAL PLUS', sub: 'Itraconazole, Ofloxacin, Ornidazole & Clobetasol Propionate', bg: 'linear-gradient(to bottom right,rgba(201,168,76,.15),rgba(201,168,76,.05))', image: 'https://images.unsplash.com/photo-1576671081837-49000212a370?auto=format&fit=crop&w=600&q=80' },
         { name: 'CINWIN AD Gel', sub: 'Clindamycin Phosphate & Adapalene Gel', bg: 'linear-gradient(to bottom right,rgba(26,58,92,.2),rgba(26,58,92,.05))', image: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=600&q=80' },
-        { name: 'F-NIL Cream', sub: 'Ketoconazole Cream', bg: 'linear-gradient(to bottom right,rgba(26,58,92,.2),rgba(26,58,92,.05))', image: 'https://images.unsplash.com/photo-1587854692152-cbe660dbde88?auto=format&fit=crop&w=600&q=80' },
-        { name: 'F-NIL Shampoo', sub: 'Ketoconazole Shampoo', bg: 'linear-gradient(to bottom right,rgba(201,168,76,.2),rgba(201,168,76,.05))', image: 'https://images.unsplash.com/photo-1526045612212-70caf35c14df?auto=format&fit=crop&w=600&q=80' },
+        { name: 'F-NIL Cream', sub: 'Ketoconazole Cream', bg: 'linear-gradient(to bottom right,rgba(26,58,92,.2),rgba(26,58,92,.05))', image: '/f-nil-products.jpeg' },
+        { name: 'F-NIL Shampoo', sub: 'Ketoconazole Shampoo', bg: 'linear-gradient(to bottom right,rgba(201,168,76,.2),rgba(201,168,76,.05))', image: '/f-nil-products.jpeg' },
         { name: 'SCAVITE Lotion', sub: 'Permethrin Lotion', bg: 'linear-gradient(to bottom right,rgba(26,58,92,.15),rgba(26,58,92,.05))', image: 'https://images.unsplash.com/photo-1550572017-ea5ebecb4a54?auto=format&fit=crop&w=600&q=80' },
       ],
     },
@@ -1038,8 +1038,8 @@ function Gallery() {
       title: 'Food Products',
       icon: Wheat,
       items: [
-        { name: 'RECOBEX Powder', sub: 'Nutritional Supplement Powder', bg: 'linear-gradient(to bottom right,rgba(26,58,92,.2),rgba(26,58,92,.05))', image: 'https://images.unsplash.com/photo-1544979590-27e6b3f42296?auto=format&fit=crop&w=600&q=80' },
-        { name: 'RECOBEX D Powder', sub: 'Nutritional Supplement Powder', bg: 'linear-gradient(to bottom right,rgba(201,168,76,.2),rgba(201,168,76,.05))', image: 'https://images.unsplash.com/photo-1582750433449-648ed127bb54?auto=format&fit=crop&w=600&q=80' },
+        { name: 'RECOBEX Powder', sub: 'Nutritional Supplement Powder', bg: 'linear-gradient(to bottom right,rgba(26,58,92,.2),rgba(26,58,92,.05))', image: '/recobex-powder.jpeg' },
+        { name: 'RECOBEX D Powder', sub: 'Nutritional Supplement Powder', bg: 'linear-gradient(to bottom right,rgba(201,168,76,.2),rgba(201,168,76,.05))', image: '/recobex-powder.jpeg' },
       ],
     },
   ]
@@ -1102,7 +1102,7 @@ function Gallery() {
         </div>
 
         <p className="text-center text-white/30 font-mono text-xs uppercase tracking-widest mt-12">
-          Product images available on request · info@skvpharma.com
+          Product images available on request · skvpharmakkd@gmail.com
         </p>
       </div>
     </section>
@@ -1196,8 +1196,8 @@ function ContactForm() {
     {
       icon: Mail,
       label: 'Email us',
-      value: 'info@skvpharma.com',
-      href: 'mailto:info@skvpharma.com',
+      value: 'skvpharmakkd@gmail.com',
+      href: 'mailto:skvpharmakkd@gmail.com',
       color: 'bg-primary/10 border-primary/20 group-hover:bg-primary',
       iconColor: 'text-primary group-hover:text-white',
     },
@@ -1333,7 +1333,7 @@ function Footer() {
             <ul className="space-y-2.5">
               <li><a href="tel:+918883967672" className="text-white/65 hover:text-accent transition text-sm">8883967672</a></li>
               <li><a href="tel:+919003849691" className="text-white/65 hover:text-accent transition text-sm">9003849691</a></li>
-              <li><a href="mailto:info@skvpharma.com" className="text-white/65 hover:text-accent transition text-sm">info@skvpharma.com</a></li>
+              <li><a href="mailto:skvpharmakkd@gmail.com" className="text-white/65 hover:text-accent transition text-sm">skvpharmakkd@gmail.com</a></li>
               <li className="text-white/65 text-sm">Managiri, Tamil Nadu</li>
             </ul>
           </div>
