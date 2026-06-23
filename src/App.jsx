@@ -990,11 +990,51 @@ function ProductCatalog() {
 }
 
 /* ----------------------------------------------------------------
+   Image Modal / Lightbox
+---------------------------------------------------------------- */
+function ImageModal({ item, onClose }) {
+  useEffect(() => {
+    const handler = (e) => { if (e.key === 'Escape') onClose() }
+    window.addEventListener('keydown', handler)
+    return () => window.removeEventListener('keydown', handler)
+  }, [onClose])
+
+  return (
+    <div
+      className={`fixed inset-0 z-[70] flex items-center justify-center p-4 transition-all duration-300 ${item ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
+    >
+      <div className="absolute inset-0 bg-black/80 backdrop-blur-md" onClick={onClose} />
+      <div className="relative z-10 max-w-lg w-full bg-deep border border-white/15 rounded-4xl overflow-hidden shadow-2xl">
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 z-10 p-2 rounded-full bg-white/10 hover:bg-white/20 transition"
+          aria-label="Close"
+        >
+          <X className="h-5 w-5 text-white" />
+        </button>
+        <div className="relative w-full aspect-[4/3] bg-black/40">
+          {item && (
+            <img src={item.image} alt={item.name} className="w-full h-full object-contain" />
+          )}
+        </div>
+        {item && (
+          <div className="px-6 py-5">
+            <h4 className="font-display font-bold text-lg text-white">{item.name}</h4>
+            <p className="font-mono text-[10px] uppercase tracking-widest text-white/50 mt-1">{item.sub}</p>
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
+
+/* ----------------------------------------------------------------
    Gallery
 ---------------------------------------------------------------- */
 function Gallery() {
   const ref = useRef(null)
   const [visible, setVisible] = useState(false)
+  const [selectedItem, setSelectedItem] = useState(null)
 
   useEffect(() => {
     const el = ref.current
@@ -1046,6 +1086,7 @@ function Gallery() {
 
   return (
     <section id="gallery" ref={ref} className="relative py-24 px-6 sm:px-10 lg:px-16 bg-deep text-white">
+      <ImageModal item={selectedItem} onClose={() => setSelectedItem(null)} />
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <span className="font-mono text-xs uppercase tracking-[0.25em] text-accent">╱ SKV Gallery</span>
@@ -1073,8 +1114,9 @@ function Gallery() {
                 {items.map((item, i) => (
                   <div
                     key={i}
+                    onClick={() => setSelectedItem(item)}
                     style={{ transitionDelay: visible ? `${i * 60}ms` : '0ms', backgroundImage: item.bg }}
-                    className={`group relative rounded-4xl border border-white/10 hover:border-accent/40 p-6 transition-all duration-700 ease-out ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
+                    className={`group relative rounded-4xl border border-white/10 hover:border-accent/40 p-6 transition-all duration-700 ease-out cursor-pointer ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
                   >
                     <div className="relative h-36 rounded-2xl overflow-hidden mb-5">
                       <img
