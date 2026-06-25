@@ -1068,7 +1068,7 @@ function Gallery() {
         { name: 'CLOSEAL S Ointment', sub: 'Clobetasol Propionate & Salicylic Acid', bg: 'linear-gradient(to bottom right,rgba(201,168,76,.2),rgba(201,168,76,.05))', image: '/closeal-s-ointment.png' },
         { name: 'CLOSEAL S Lotion', sub: 'Clobetasol Propionate & Salicylic Acid', bg: 'linear-gradient(to bottom right,rgba(26,58,92,.2),rgba(26,58,92,.05))', image: '/closeal-s-lotion.png' },
         { name: 'CLOSEAL PLUS', sub: 'Itraconazole, Ofloxacin, Ornidazole & Clobetasol Propionate', bg: 'linear-gradient(to bottom right,rgba(201,168,76,.15),rgba(201,168,76,.05))', image: 'https://images.unsplash.com/photo-1576671081837-49000212a370?auto=format&fit=crop&w=600&q=80' },
-        { name: 'CINWIN AD Gel', sub: 'Clindamycin Phosphate & Adapalene Gel', bg: 'linear-gradient(to bottom right,rgba(26,58,92,.2),rgba(26,58,92,.05))', image: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=600&q=80' },
+        { name: 'CINWIN AD Gel', sub: 'Clindamycin Phosphate & Adapalene Gel', bg: 'linear-gradient(to bottom right,rgba(26,58,92,.2),rgba(26,58,92,.05))', image: '/cinwin-ad-gel.png' },
         { name: 'F-NIL Cream', sub: 'Ketoconazole Cream', bg: 'linear-gradient(to bottom right,rgba(26,58,92,.2),rgba(26,58,92,.05))', image: '/f-nil-cream.png' },
         { name: 'F-NIL Shampoo', sub: 'Ketoconazole Shampoo', bg: 'linear-gradient(to bottom right,rgba(201,168,76,.2),rgba(201,168,76,.05))', image: '/f-nil-shampoo.png' },
         { name: 'SCAVITE Lotion', sub: 'Permethrin Lotion', bg: 'linear-gradient(to bottom right,rgba(26,58,92,.15),rgba(26,58,92,.05))', image: 'https://images.unsplash.com/photo-1550572017-ea5ebecb4a54?auto=format&fit=crop&w=600&q=80' },
