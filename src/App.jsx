@@ -1014,7 +1014,11 @@ function ImageModal({ item, onClose }) {
         </button>
         <div className="relative w-full aspect-[4/3] bg-black/40">
           {item && (
-            <img src={item.image} alt={item.name} className="w-full h-full object-contain" />
+            item.image
+              ? <img src={item.image} alt={item.name} className="w-full h-full object-contain" />
+              : <div className="w-full h-full flex items-center justify-center">
+                  {item.icon && <item.icon className="h-16 w-16 text-accent/40" strokeWidth={1.5} />}
+                </div>
           )}
         </div>
         {item && (
@@ -1054,9 +1058,9 @@ function Gallery() {
       items: [
         { name: 'RECOBEX-Z Capsules', sub: 'B-Complex with Zinc', bg: 'linear-gradient(to bottom right,rgba(26,58,92,.25),rgba(26,58,92,.08))', image: '/recobex-z.png' },
         { name: 'RECOBEX-C Tablets', sub: 'Multivitamins, Minerals, Cyanocobalamin & Grape Seed Extract', bg: 'linear-gradient(to bottom right,rgba(201,168,76,.2),rgba(201,168,76,.05))', image: '/recobex-c.png' },
-        { name: 'NEAVITE-B Tablet', sub: 'Mecobalamin, Folic Acid & Alpha Lipoic Acid', bg: 'linear-gradient(to bottom right,rgba(26,58,92,.2),rgba(26,58,92,.05))', image: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=600&q=80' },
-        { name: 'E-CAL Capsules', sub: 'Vitamin E, Calcium Panthothenate & B-Complex', bg: 'linear-gradient(to bottom right,rgba(201,168,76,.15),rgba(201,168,76,.05))', image: 'https://images.unsplash.com/photo-1576671081837-49000212a370?auto=format&fit=crop&w=600&q=80' },
-        { name: 'ONE PLUS Tablet', sub: 'Aceclofenac with Paracetamol', bg: 'linear-gradient(to bottom right,rgba(26,58,92,.25),rgba(26,58,92,.08))', image: 'https://images.unsplash.com/photo-1582750433449-648ed127bb54?auto=format&fit=crop&w=600&q=80' },
+        { name: 'NEAVITE-B Tablet', sub: 'Mecobalamin, Folic Acid & Alpha Lipoic Acid', bg: 'linear-gradient(to bottom right,rgba(26,58,92,.2),rgba(26,58,92,.05))', image: null },
+        { name: 'E-CAL Capsules', sub: 'Vitamin E, Calcium Panthothenate & B-Complex', bg: 'linear-gradient(to bottom right,rgba(201,168,76,.15),rgba(201,168,76,.05))', image: null },
+        { name: 'ONE PLUS Tablet', sub: 'Aceclofenac with Paracetamol', bg: 'linear-gradient(to bottom right,rgba(26,58,92,.25),rgba(26,58,92,.08))', image: null },
       ],
     },
     {
@@ -1067,11 +1071,11 @@ function Gallery() {
         { name: 'SOFTEE Soap', sub: 'Aloe Vera, Glycerin & Vitamin E', bg: 'linear-gradient(to bottom right,rgba(26,58,92,.15),rgba(26,58,92,.05))', image: '/softee-soap.jpeg' },
         { name: 'CLOSEAL S Ointment', sub: 'Clobetasol Propionate & Salicylic Acid', bg: 'linear-gradient(to bottom right,rgba(201,168,76,.2),rgba(201,168,76,.05))', image: '/closeal-s-ointment.png' },
         { name: 'CLOSEAL S Lotion', sub: 'Clobetasol Propionate & Salicylic Acid', bg: 'linear-gradient(to bottom right,rgba(26,58,92,.2),rgba(26,58,92,.05))', image: '/closeal-s-lotion.png' },
-        { name: 'CLOSEAL PLUS', sub: 'Itraconazole, Ofloxacin, Ornidazole & Clobetasol Propionate', bg: 'linear-gradient(to bottom right,rgba(201,168,76,.15),rgba(201,168,76,.05))', image: 'https://images.unsplash.com/photo-1576671081837-49000212a370?auto=format&fit=crop&w=600&q=80' },
+        { name: 'CLOSEAL PLUS', sub: 'Itraconazole, Ofloxacin, Ornidazole & Clobetasol Propionate', bg: 'linear-gradient(to bottom right,rgba(201,168,76,.15),rgba(201,168,76,.05))', image: null },
         { name: 'CINWIN AD Gel', sub: 'Clindamycin Phosphate & Adapalene Gel', bg: 'linear-gradient(to bottom right,rgba(26,58,92,.2),rgba(26,58,92,.05))', image: '/cinwin-ad-gel.png' },
         { name: 'F-NIL Cream', sub: 'Ketoconazole Cream', bg: 'linear-gradient(to bottom right,rgba(26,58,92,.2),rgba(26,58,92,.05))', image: '/f-nil-cream.png' },
         { name: 'F-NIL Shampoo', sub: 'Ketoconazole Shampoo', bg: 'linear-gradient(to bottom right,rgba(201,168,76,.2),rgba(201,168,76,.05))', image: '/f-nil-shampoo.png' },
-        { name: 'SCAVITE Lotion', sub: 'Permethrin Lotion', bg: 'linear-gradient(to bottom right,rgba(26,58,92,.15),rgba(26,58,92,.05))', image: 'https://images.unsplash.com/photo-1550572017-ea5ebecb4a54?auto=format&fit=crop&w=600&q=80' },
+        { name: 'SCAVITE Lotion', sub: 'Permethrin Lotion', bg: 'linear-gradient(to bottom right,rgba(26,58,92,.15),rgba(26,58,92,.05))', image: null },
       ],
     },
     {
@@ -1114,18 +1118,26 @@ function Gallery() {
                 {items.map((item, i) => (
                   <div
                     key={i}
-                    onClick={() => setSelectedItem(item)}
+                    onClick={() => setSelectedItem({ ...item, icon: Icon })}
                     style={{ transitionDelay: visible ? `${i * 60}ms` : '0ms', backgroundImage: item.bg }}
                     className={`group relative rounded-4xl border border-white/10 hover:border-accent/40 p-6 transition-all duration-700 ease-out cursor-pointer ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
                   >
                     <div className="relative h-36 rounded-2xl overflow-hidden mb-5">
-                      <img
-                        src={item.image}
-                        alt={item.name}
-                        loading="lazy"
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                      {item.image ? (
+                        <>
+                          <img
+                            src={item.image}
+                            alt={item.name}
+                            loading="lazy"
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                        </>
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center">
+                          <Icon className="h-12 w-12 text-accent/50" strokeWidth={1.5} />
+                        </div>
+                      )}
                       <span className="absolute top-2 right-2 font-mono text-[8px] uppercase tracking-widest text-white/80 bg-black/40 backdrop-blur-sm px-2 py-0.5 rounded-full">
                         {title}
                       </span>
