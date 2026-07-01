@@ -219,7 +219,7 @@ function Hero() {
       <div className="relative z-10 flex min-h-[100dvh] flex-col items-center justify-center text-center">
         <div className="px-6 sm:px-10 lg:px-16 max-w-5xl">
           <p className="hero-meta font-mono text-xs uppercase tracking-[0.3em] text-accent mb-6">
-            GMP Certified · Est. 2012 · Tamil Nadu, India
+            Est. 2012 · Tamil Nadu, India
           </p>
           <h1 className="font-display font-extrabold text-white leading-[0.95] tracking-tight">
             <span className="hero-line-1 block text-4xl sm:text-6xl md:text-7xl">
@@ -234,7 +234,7 @@ function Hero() {
           </h1>
 
           <p className="hero-meta mx-auto max-w-xl text-white/70 text-base sm:text-lg mt-8 leading-relaxed">
-            Pharmaceutical manufacturer trusted by doctors across Tamil Nadu — delivering quality from raw material to finished product since 2012.
+            Pharmaceutical marketing company trusted by doctors across Tamil Nadu — delivering quality products since 2012.
             <span className="text-white"> Every life is an inspiration.</span>
           </p>
 
@@ -711,7 +711,7 @@ function Pillars() {
   const pillars = [
     {
       n: '01', title: 'Experience', target: 14, suffix: '+', label: 'years of excellence',
-      desc: 'Manufacturing and marketing ethical pharmaceutical products since 2012. Trusted by doctors and distributors across Tamil Nadu.',
+      desc: 'Marketing ethical pharmaceutical products since 2012. Trusted by doctors and distributors across Tamil Nadu.',
     },
     {
       n: '02', title: 'Quality', target: 100, suffix: '%', label: 'GMP certified',
@@ -1339,7 +1339,7 @@ function Footer() {
             <span className="font-serif italic font-medium text-accent block">trust.</span>
           </h2>
           <div className="flex flex-col sm:flex-row sm:items-end justify-between mt-8 gap-6">
-            <p className="text-white/50 max-w-md">SKV Pharma — GMP-certified pharmaceutical manufacturer, serving doctors and patients across Tamil Nadu since 2012.</p>
+            <p className="text-white/50 max-w-md">SKV Pharma — pharmaceutical marketer, serving doctors and patients across Tamil Nadu since 2012.</p>
             <a href="#contact" className="magnetic-btn inline-flex items-center gap-2 bg-accent text-white font-semibold px-7 py-3.5 rounded-full self-start sm:self-auto">
               Get in Touch
               <ArrowRight className="h-4 w-4" />
@@ -1356,7 +1356,7 @@ function Footer() {
               <span className="font-display font-bold text-lg">SKV Pharma</span>
             </div>
             <p className="text-white/50 text-sm leading-relaxed max-w-xs">
-              GMP-certified pharmaceutical manufacturer committed to delivering innovative medicines to improve health and wellbeing.
+              Pharmaceutical marketer committed to delivering quality medicines to improve health and wellbeing.
             </p>
             <p className="font-mono text-[10px] uppercase tracking-widest text-white/30 mt-6">Est. 2012 · Tamil Nadu, India</p>
           </div>
